@@ -1,0 +1,411 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>{$title}</title>
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link rel="SHORTCUT ICON" HREF="./images/favicon.ico" />
+        <script type="text/javascript" src="./lib/stopwatch/stopwatch-without-lap.js"></script>
+    </head>
+    <body onload="load();">
+
+        {include file="menu.xhtml" title="Menu header"}
+
+        <table class="capsule" width="90%" height="100%">
+            <tr>
+                <td>
+                    {if $tab != "ticket_new"}
+
+                    <table  class="ticketnav">
+                        <tr>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <a href="mountain.php" class="ticketnav"><< Dashboard</a> |
+                                        </td>
+                                        <td>
+                                            <a href="ticket.php?ticket_id={$ticket_id}&tab=ticket" class="ticketnav">Synopsis</a> |
+                                        </td>
+                                        <td>
+                                            <a href="ticket.php?ticket_id={$ticket_id}&tab=breakdown" class="ticketnav">To-Do</a> |
+                                        </td>
+                                        <td>
+                                            <a href="ticket.php?ticket_id={$ticket_id}&tab=attachments" class="ticketnav">Documents</a> |
+                                        </td>
+                                        <td>
+                                            <a href="ticket.php?ticket_id={$ticket_id}&tab=time" class="ticketnav">Time</a> |
+                                        </td>
+                                        <td>
+                                            <a href="ticket.php?ticket_id={$ticket_id}&tab=role" class="ticketnav">Add to Pipeline</a> |
+                                        </td>
+                                        <td>
+                                            <a href="ticket.php?ticket_id={$ticket_id}&tab=releasecontainer" class="ticketnav">Release</a> |
+                                        </td>
+                                        <td>
+                                            <a href="ticket.php?ticket_id={$ticket_id}&tab=ticket_edit" class="ticketnav">Edit Ticket</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br />
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    {/if}
+                    <table class="tickettable">
+                        <tr>
+                            <td class="tickettabletop">
+                                Ticket: {$ticket_id}{if (!empty($warning))} - {$warning}{/if}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="70%" valign="top" class="tickettablebody">
+                                <br />
+                                <!-- This is the ticket info and ticket editing tab -->
+                                {if ($tab == "ticket" or $tab == "ticket_edit")}
+
+                                {foreach from=$ticket item=row_obj}
+                                <form method="POST" action="ticket.php?ticket_id={$row_obj->id}&mode=edit_ticket">
+                                    <table width="97%">
+                                        <tr>
+                                            <td width="20%">Ticket ID:</td><td class="ticket_details" width="80%">{$row_obj->id}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Created By:</td><td class="ticket_details">{$row_obj->user_name}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Date Created:</td><td class="ticket_details">{$row_obj->created_at}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ticket Title:</td><td class="ticket_details">{if ($tab == 'ticket_edit')}<input type="TEXT" size="70" name="ticket_name" value="{/if}{$row_obj->name|escape:'html'}{if ($tab == 'ticket_edit')}" />{/if}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Predicted Total Hours:</td><td class="ticket_details">{if ($tab == 'ticket_edit')}<input type="TEXT" size="10" name="predicted_hours" value="{/if}{$row_obj->predicted_hours}{if ($tab == 'ticket_edit')}" />{/if}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Business Value Rating:</td><td class="ticket_details">{if ($tab == 'ticket_edit')}<select name="business_value_rating">{html_options values=$rating_dropdown output=$rating_dropdown selected=$row_obj->business_value_rating}</select>{else}{$row_obj->business_value_rating}{/if} - (1 no value - 10 game changer)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Complexity Rating:</td><td class="ticket_details">{if ($tab == 'ticket_edit')}<select name="complexity_rating">{html_options values=$rating_dropdown output=$rating_dropdown selected=$row_obj->complexity_rating}</select>{else}{$row_obj->complexity_rating}{/if} - (1 easy - 10 very complex)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Priority/Urgency:</td><td class="ticket_details">{if ($tab == 'ticket_edit')}<select name="priority">{html_options values=$rating_dropdown output=$rating_dropdown selected=$row_obj->priority}</select>{else}{$row_obj->priority}{/if} - (1 whenever you get around to it - 10 right now)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total Value Ratio:</td><td class="ticket_details">{$row_obj->value_ratio}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Type:</td><td class="ticket_details">{if ($tab == 'ticket_edit')}<select name="tickettype_id">{foreach from=$tickettype_dropdown item=type_array}<option value="{$type_array->id}" {if ($type_array->id == $row_obj->tickettype_id)}selected{/if}>{$type_array->name}</option>{/foreach}</select>{else}{$row_obj->ticket_type}{/if}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Status:</td><td class="ticket_details">{if ($tab == 'ticket_edit')}<select name="status_id">{foreach from=$status_dropdown item=status_array}<option value="{$status_array->id}" {if ($status_array->id == $row_obj->status_id)}selected{/if}>{$status_array->name}</option>{/foreach}</select>{else}{$row_obj->status_name}{/if}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan ="2">
+                                                Ticket Details:
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"  class="ticket_details">
+                                                <br />{if ($tab == 'ticket_edit')}<textarea rows="15" cols="70" name="ticket_info">{$row_obj->ticket_info|escape:'html'}</textarea>{else}{$row_obj->ticket_info_html}{/if}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                {if ($tab == 'ticket_edit')}
+                                                <input type="SUBMIT" name="edit_ticket" value="Update" class="post" /> - <a href="ticket.php?ticket_id={$row_obj->id}">Cancel</a>
+                                                {/if}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                                {/foreach}
+
+
+                                {/if}
+
+                                <!-- This is the layout for creating a new ticket -->
+                                {if ($tab == "ticket_new")}
+                                <form method="POST" action="ticket.php?mode=new_ticket">
+                                    <table width="97%">
+                                        <tr>
+                                            <td>Ticket Title:</td><td  class="ticket_details"><input type="TEXT" size="70" name="ticket_name" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Predicted Total Hours:</td><td class="ticket_details"><input type="TEXT" size="10" name="predicted_hours" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Business Value Rating: </td><td class="ticket_details"><select name="business_value_rating">{html_options values=$rating_dropdown output=$rating_dropdown}</select> - (1 no value - 10 game changer)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Complexity Rating:</td><td class="ticket_details"><select name="complexity_rating">{html_options values=$rating_dropdown output=$rating_dropdown}</select> - (1 easy - 10 very complex)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Priority/Urgency:</td><td class="ticket_details"><select name="priority">{html_options values=$rating_dropdown output=$rating_dropdown}</select> - (1 whenever you get around to it - 10 right now)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Type:</td><td class="ticket_details"><select name="tickettype_id">{foreach from=$tickettype_dropdown item=type_array}<option value="{$type_array->id}">{$type_array->name}</option>{/foreach}</select></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Status:</td><td class="ticket_details"><select name="status_id">{foreach from=$status_dropdown item=status_array}<option value="{$status_array->id}">{$status_array->name}</option>{/foreach}</select></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan ="2">
+                                                Ticket Details:
+                                                <br /><textarea rows="15" cols="70" name="ticket_info"></textarea>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <input type="SUBMIT" value="Add" name="add_ticket" class="post" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                                {/if}
+
+                                <!-- This is where attachments are added and removed -->
+                                {if ($tab == "attachments")}
+                                <form name="add_attachment" enctype="multipart/form-data" method="post" action="ticket.php?ticket_id={$ticket_id}&mode=edit_attachment&attachment_id=0">
+                                    Description: <input type="text" size ="50" name="attachment_description" /><br /><br />
+                                    <input type="file" size="32" name="attachment_file" value=""  class="post" />
+                                    <input type="hidden" name="action" value="simple" />
+                                    <input type="submit" name="upload" value="Upload" class="post" />
+                                </form>
+                                <hr />
+                                <table width="100%">
+                                    <tr>
+                                        <td>Created</td>
+                                        <td>Attachment</td>
+                                        <td></td>
+                                    </tr>
+                                    {foreach from=$attachments item=row_obj}
+                                    <tr>
+                                        <td>{$row_obj->created_at}</td>
+                                        <td><a href="{$row_obj->source}" target="_self">{$row_obj->description}</a></td>
+                                        <td>
+                                            <form action="ticket.php?ticket_id={$row_obj->ticket_id}&mode=edit_attachment&attachment_id={$row_obj->attachment_id}" method="post">
+                                                <input type="submit" value="-" name="delete" class="post" />
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <hr />
+                                        </td>
+                                    </tr>
+
+                                    {/foreach}
+                                </table>
+                                {/if}
+
+                                <!-- This is where user roles are added and removed -->
+                                {if ($tab == "role")}
+                                <form method="post" action="ticket.php?ticket_id={$ticket_id}&mode=edit_role">
+                                    User: <select name="tur_user_id">{foreach from=$users_dropdown item=users_array}<option value="{$users_array->id}">{$users_array->name}</option>{/foreach}</select>
+                                    ::  Role: <select name="tur_role_id">{foreach from=$roles_dropdown item=roles_array}<option value="{$roles_array->id}">{$roles_array->name}</option>{/foreach}</select>
+                                    <input type="submit" name="add_userrole" value="Add" class="post" />
+                                </form>
+                                {foreach from=$ticketuserrole_dropdown item=tur}
+                                <hr />
+                                <table width="100%">
+                                    <tr>
+                                        <td width="34%">User: {$tur->ticket_user}</td>
+                                        <td width="33%">Role: {$tur->ticket_role}</td>
+                                        <td width="33%"><form action="ticket.php?ticket_id={$ticket_id}&mode=edit_role&tur_id={$tur->id}" method="post">
+                                                <input type="submit" value="-" name="delete" class="post" />
+                                            </form></td>
+                                    </tr>
+                                </table>
+                                {/foreach}
+
+                                {/if}
+
+
+                                <!-- This is where breakdown items are added and removed -->
+                                {if ($tab == "breakdown")}
+                                <form method="post" action="ticket.php?ticket_id={$ticket_id}&mode=edit_breakdown">
+                                    To-Do: <input type="text" size="45" name="breakdown_description" />
+                                    <input type="submit" name="add_breakdown_item" value="Add"  class="post" />
+                                </form>
+                                {foreach from=$breakdown item=bd}
+                                <hr />
+                                <table width="100%">
+                                    <tr>
+                                        <td width="60%">{$bd->created_by} - {$bd->created_at} - <a href="breakdownitem.php?breakdown_id={$bd->id}&ticket_id={$ticket_id}">{$bd->description}</a></td>
+                                        <td width="20%">{$bd->complete_text}</td>
+                                        <td width="20%"><form action="ticket.php?ticket_id={$ticket_id}&mode=edit_breakdown&breakdown_id={$bd->id}" method="post">
+                                                {if ($bd->complete == 0)}<input type="submit" value="Done" title="Done" name="mark_complete" class="post" />{/if}
+                                                {if ($bd->complete == 1)}<input type="submit" value="Undo" title="Undo" name="mark_incomplete" class="post" />{/if}
+                                                <input type="submit" value="-" title="-" name="delete" class="post" />
+                                            </form></td>
+                                    </tr>
+                                </table>
+                                {/foreach}
+                                {/if}
+
+                                <!-- This is the tab where users track time -->
+                                {if ($tab == "time")}
+
+                                <h3>Stopwatch</h3>
+                                <form method="post" action="ticket.php?ticket_id={$ticket_id}&mode=edit_time">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                Stopwatch :: <input type="text" id="disp" name="stopwatch" maxlength="12" /> ::
+                                                <button type="button" onclick="ss()" id="butt" class="post">Start/Stop</button>
+                                                <button type="button" onclick="r()" id="butt2" class="post">Reset</button>
+                                            </td>
+                                            <td>
+                                                :: Comment: <input type="text" size ="25" name="time_description" />
+                                                <input type="submit" name="add_time" value="Add" class="post" />
+                                            </td>
+                                        <tr>
+                                    </table>
+                                </form>
+
+                                <hr />
+                                <h3>Manual</h3>
+                                <form method="post" action="ticket.php?ticket_id={$ticket_id}&mode=edit_time">
+                                    Hours: <input type="text" size ="10" name="hour" />
+                                    :: Minutes: <input type="text" size ="10" name="minute" />
+                                    :: Comment: <input type="text" size ="25" name="time_description" />
+                                    <input type="submit" name="add_time" value="Add" class="post" />
+                                </form>
+                                <hr />
+                                <table width="100%">
+                                    <tr>
+                                        <td>Created</td>
+                                        <td>User</td>
+                                        <td>Hours</td>
+                                        <td>Minutes</td>
+                                        <td>Comment</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6">
+                                            <hr />
+                                        </td>
+                                    </tr>
+                                    {foreach from=$time item=row_obj}
+                                    <tr>
+                                        <td width="25%">{$row_obj->created_at}</td>
+                                        <td width="10%">{$row_obj->user_name}</td>
+                                        <td width="5%">{$row_obj->hour}</td>
+                                        <td width="10%">{$row_obj->minute}</td>
+                                        <td width="40%">{$row_obj->description}</td>
+                                        <td width="10%"><form action="ticket.php?ticket_id={$ticket_id}&mode=edit_time&time_id={$row_obj->time_id}" method="post">
+                                                <input type="submit" value="-" name="delete" class="post" />
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6">
+                                            <hr />
+                                        </td>
+                                    </tr>
+                                    {/foreach}
+                                </table>
+                                {foreach from=$time_total item=row_obj}
+                                <table>
+                                    <tr>
+                                        <td>Total Hours: {$row_obj->total_hours}</td>
+                                        <td>Total Minutes: {$row_obj->total_minutes}</td>
+                                    </tr>
+                                </table>
+                                {/foreach}
+
+                                {/if}
+
+
+                                <!-- This is where release container items are added and removed -->
+                                {if ($tab == "releasecontainer")}
+                                <form method="post" action="ticket.php?ticket_id={$ticket_id}&mode=edit_releasecontainer">
+                                    Release Name: <input type="text" size="45" name="releasecontainer_name" />
+                                    <input type="submit" name="add_release_container" value="Add" class="post" />
+                                </form>
+                                <br />
+                                <form method="post" action="ticket.php?ticket_id={$ticket_id}&mode=edit_releasecontainer">
+                                    Release Name:
+                                    <select name="releasecontainer_id">
+                                        {foreach from=$releasecontainer_dropdown item=rc_dropdown}
+                                        <option value="{$rc_dropdown->id}" >{$rc_dropdown->name}</option>
+                                        {/foreach}
+                                    </select>
+                                    <input type="submit" name="assign_release_container" value="Assign" class="post" />
+                                </form>
+
+                                {foreach from=$releasecontainer item=rc}
+                                <hr />
+                                <table width="100%">
+                                    <tr>
+                                        <td width="90%"><a href="releasecontainer.php?releasecontainer_id={$rc->id}" target="_self">{$rc->container_name}</a></td>
+                                        <td width="10%">
+                                            <form action="ticket.php?ticket_id={$ticket_id}&mode=edit_releasecontainer&releasecontainer_id={$rc->id}" method="post">
+                                                <input type="submit" value="-" name="delete" class="post" />
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </table>
+                                {/foreach}
+                                {/if}
+                            </td>
+                            <td width="30%" valign="top" {if $tab != "ticket_new"} class="ticketnotes"{/if}>
+                                {if $tab != "ticket_new"}
+                                <table width="95%">
+                                    <tr>
+                                        <td>
+                                            <h3>Notes</h3>
+                                            <form method="POST" action="ticket.php?ticket_id={$ticket_id}&mode=edit_ticket">
+                                                <table>
+                                                    <tr>
+                                                        <td><textarea rows="5" cols="30" name="note"></textarea></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input type=CHECKBOX name="statusnote" /> Update My Status
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input type="submit" name="add_note" value="Add Note" class="post" /></td>
+                                                    </tr>
+                                                </table>
+                                            </form>
+                                            <br /><br />
+                                            {foreach from=$ticket_notes item=notes}
+                                            <table width="100%">
+                                                <tr>
+                                                    <td><h3>{$notes->user_name} - {$notes->created_at}</h3></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{$notes->note}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="10">
+                                                        <hr />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            {/foreach}
+                                        </td>
+                                    </tr>
+                                </table>
+                                {/if}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <table class="shamelessplug">
+            <tr>
+                <td>
+                    Powered by open source ::mound:: from <a href="http://moundlabs.com">moundlabs.com</a>.
+                </td>
+            </tr>
+        </table>
+
+    </body>
+</html>

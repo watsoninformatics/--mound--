@@ -1,0 +1,66 @@
+<div id="stats">
+    {foreach from=$ticketstats item=ts}
+    <table width="600">
+        <tr>
+            <td colspan="6">
+                <h3>
+                {if ($assigned == "yes" and $mytickets == "yes")}
+                My Pipeline
+                {elseif ($assigned == "yes")}
+                Everyone's Pipeline
+                {elseif ($assigned == "no")}
+                Backlog
+                {else}
+                All Tickets
+                {/if}
+                </h3>
+                 
+                {$totaltickets} Total Ticket(s)
+                {if !empty($search_string)}<br />
+                {if $search_type == "ticket_content"}Ticket Content: {else}Ticket Number: {/if}
+                {$search_string} - <a href="mountain.php?mode=nosearch">Remove Search Filter</a>
+                {/if}
+                
+            </td>
+        </tr>
+        <tr>
+            <td width="50"><a href="mountain.php?status=all&type=all&mode=filter">All</a></td>
+            <td width="50">{if ($status_id == 1)}New{else}<a href="mountain.php?status=1&mode=filter">New</a>{/if}</td>
+            <td width="100">{if ($status_id == 2)}Analysis/Research{else}<a href="mountain.php?status=2&mode=filter">Analysis/Research</a>{/if}</td>
+            <td width="100">{if ($status_id == 3)}Development{else}<a href="mountain.php?status=3&mode=filter">Development</a>{/if}</td>
+            <td width="100">{if ($status_id == 4)}Testing{else}<a href="mountain.php?status=4&mode=filter">Testing</a>{/if}</td>
+            <td width="100">{if ($status_id == 5)}Implementation{else}<a href="mountain.php?status=5&mode=filter">Implementation</a>{/if}</td>
+            <td width="100">{if ($status_id == 6)}Pending{else}<a href="mountain.php?status=6&mode=filter">Pending</a>{/if}</td>
+        </tr>
+        <tr>
+            <td>{if ($tickettype_id == 1)}Projects{else}<a href="mountain.php?type=1&mode=filter">Projects</a>{/if}</td>
+            <td class="{if ($ts->projects_new > 0)}activestats{else}inactivestats{/if}">{$ts->projects_new}</td>
+            <td class="{if ($ts->projects_ar > 0)}activestats{else}inactivestats{/if}">{$ts->projects_ar}</td>
+            <td class="{if ($ts->projects_dev > 0)}activestats{else}inactivestats{/if}">{$ts->projects_dev}</td>
+            <td class="{if ($ts->projects_test > 0)}activestats{else}inactivestats{/if}">{$ts->projects_test}</td>
+            <td class="{if ($ts->projects_imp > 0)}activestats{else}inactivestats{/if}">{$ts->projects_imp}</td>
+            <td class="{if ($ts->projects_pend > 0)}activestats{else}inactivestats{/if}">{$ts->projects_pend}</td>
+        </tr>
+        <tr>
+            <td>{if ($tickettype_id == 2)}Tasks{else}<a href="mountain.php?type=2&mode=filter">Tasks</a>{/if}</td>
+            <td class="{if ($ts->tasks_new > 0)}activestats{else}inactivestats{/if}">{$ts->tasks_new}</td>
+            <td class="{if ($ts->tasks_ar > 0)}activestats{else}inactivestats{/if}">{$ts->tasks_ar}</td>
+            <td class="{if ($ts->tasks_dev > 0)}activestats{else}inactivestats{/if}">{$ts->tasks_dev}</td>
+            <td class="{if ($ts->tasks_test > 0)}activestats{else}inactivestats{/if}">{$ts->tasks_test}</td>
+            <td class="{if ($ts->tasks_imp > 0)}activestats{else}inactivestats{/if}">{$ts->tasks_imp}</td>
+            <td class="{if ($ts->tasks_pend > 0)}activestats{else}inactivestats{/if}">{$ts->tasks_pend}</td>
+        </tr>
+        <tr>
+            <td>{if ($tickettype_id == 3)}Bugs{else}<a href="mountain.php?type=3&mode=filter">Bugs</a>{/if}</td>
+            <td class="{if ($ts->bugs_new > 0)}activestats{else}inactivestats{/if}">{$ts->bugs_new}</td>
+            <td class="{if ($ts->bugs_ar > 0)}activestats{else}inactivestats{/if}">{$ts->bugs_ar}</td>
+            <td class="{if ($ts->bugs_dev > 0)}activestats{else}inactivestats{/if}">{$ts->bugs_dev}</td>
+            <td class="{if ($ts->bugs_test > 0)}activestats{else}inactivestats{/if}">{$ts->bugs_test}</td>
+            <td class="{if ($ts->bugs_imp > 0)}activestats{else}inactivestats{/if}">{$ts->bugs_imp}</td>
+            <td class="{if ($ts->bugs_pend > 0)}activestats{else}inactivestats{/if}">{$ts->bugs_pend}</td>
+        </tr>
+        <tr>
+        </tr>
+    </table>
+    {/foreach}
+</div>

@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>{$title}</title>
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link rel="SHORTCUT ICON" HREF="./images/favicon.ico" />
+    </head>
+    <body>
+        {include file="menu.xhtml" title="Menu header"}
+        <table class="capsule" width="90%" height="100%">
+            <tr>
+                <td>
+                    <div  class="statustop">
+                        <table width="100%">
+                            <tr>
+                                <td valign="top" width="80%" class="listliner">
+                                    <form method="POST" action="userstatus.php?mode=user&user={$user_id}">
+                                        <table class="statuspost" width="100%">
+                                            <tr>
+                                                <td valign="middle" class="statuspost" width="40%">
+                                                    <textarea rows="5" cols="70" name="status_text" class="statusbox"></textarea>
+                                                </td>
+                                                <td valign="middle" width="10%">
+                                                    <input type="SUBMIT" name="post_status" value="Send" style="height:30px; width:50px;" class="post" />
+                                                </td>
+                                                <td align="left" valign="top" class="statuspost" width="50%">
+                                                    To link a status to a ticket, simply start the status with tk::insert_ticket_number_here::
+                                                    <br />(e.g. tk::1::)
+                                                    <br /><br />To message someone, place @:their_user_name anywhere in the message.
+                                                    <br />(e.g. Hello, @:jsmith.  How are you?)
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                    {foreach from=$user_status item=us}
+                                    <div  id="statusitem">
+                                        <table>
+                                            <tr>
+                                                <td width="99%">
+                                                    <h3>
+                                                        <a href="userstatus.php?mode=user&user={$us->user_id}">{$us->user_name}</a> -
+                                                        {$us->created_at} {if ($us->user_id == $user_id)} -
+                                                        <a href="userstatus.php?mode={$mode}&command=delete&userstatus_id={$us->userstatus_id}">Delete</a>{/if}
+                                                    </h3>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="99%">
+                                                    <div id="statusitem">
+                                                        {$us->user_status}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    {/foreach}
+                                </td>
+                                <td width="20%" valign="top">
+                                    <h3>::mound::</h3>
+                                    <a href="javascript:location.reload(true)" class="ticketnav">Refresh</a>
+                                    <br />
+                                    <a href="mountain.php?mode=logout" class="ticketnav">Log Out</a>
+                                    <br /><br />
+                                    <h3>Releases</h3>
+                                    {foreach from=$releasecontainer_dropdown item=rc_dropdown}
+                                    <a href="releasecontainer.php?releasecontainer_id={$rc_dropdown->id}" title="{$rc_dropdown->name}" target="_self">{$rc_dropdown->name}</a><br />
+                                    {/foreach}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table class="shamelessplug">
+            <tr>
+                <td>
+                    Powered by open source ::mound:: from <a href="http://moundlabs.com">moundlabs.com</a>.
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>{$title}</title>
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link rel="SHORTCUT ICON" HREF="./images/favicon.ico" />
+    </head>
+    <body>
+
+        {include file="menu.xhtml" title="Menu header"}
+        <table class="capsule" width="90%" height="100%">
+            <tr>
+                <td>
+                    <table class="rctable">
+                        <tr>
+                            <td>
+
+                                <h3>{$releasecontainer_name}</h3>
+
+                                {if (!empty($warning))}
+                                <br />
+                                {$warning}
+                                <br />
+                                {/if}
+                                {if {empty($releasecontainer_id)}}
+                                <form method="post" action="releasecontainer.php?&mode=edit_releasecontainer">
+                                    Add Container: <input type="text" size="45" name="releasecontainer_name" />
+                                    <input type="submit" name="add_release_container" value="Add Release" class="post" />
+                                </form>
+                                {else}
+                                <hr />
+                                {/if}
+                                <br />
+                                {if {!empty($releasecontainer_id)}}
+                                <h3>Tickets</h3>
+                                <div id="rcticketlist">
+                                    <table width="100%">
+                                        {foreach from=$ticket item=tickets}
+                                        <tr>
+                                            <td width="17%"><h3>{$tickets->ticket_id}</h3></td>
+                                            <td width="49%"><a href="ticket.php?ticket_id={$tickets->ticket_id}" target="_self">{$tickets->ticket_name}</a>
+                                                <br />Predicted Hours: {$tickets->predicted_hours}  Hours Spent: {$tickets->hours_spent}<br/>
+                                                Percent Completed: {$tickets->percent_done}%
+                                                <br />
+                                            </td>
+                                            <td width="17%" align="center">{$tickets->ticket_status}</td>
+                                            <td width="17%">
+                                                <form action="releasecontainer.php?ticket_id={$tickets->ticket_id}&mode=edit_releasecontainer&releasecontainer_id={$releasecontainer_id}" method="post">
+                                                    <input type="submit" title="Remove" value="-" name="remove_from_container" class="post" />
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4">
+                                                <hr />
+                                            </td>
+                                        </tr>
+                                        {/foreach}
+                                        <tr>
+                                            <td colspan="4">
+                                                {foreach from=$time_total item=tt}
+                                                Total Hours: {$tt->total_hours}  Total Minutes: {$tt->total_minutes}
+                                                {/foreach}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <hr />
+                                <br />
+                                <h3>Release Attachments</h3>
+                                <div id="rcticketlist">
+                                    <table>
+                                        {foreach from=$attachments item=att}
+                                        <tr>
+                                            <td width="30%">{$att->created_at}</td>
+                                            <td width="70%">Ticket: <a href="ticket.php?ticket_id={$att->ticket_id}">{$att->ticket_id}</a> - <a href="{$att->source}" target="_self">{$att->description}</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <hr />
+                                            </td>
+                                        </tr>
+
+                                        {/foreach}
+                                    </table>
+                                </div>
+                                <hr />
+                                <br />
+                                <h3>Release Notes</h3>
+                                <div id="rcticketlist">
+                                    <table>
+                                        {foreach from=$notes item=n}
+                                        <tr>
+                                            <td width="30%">
+                                                {$n->created_at} - {$n->user_name}
+                                                <br />
+                                                <a href="ticket.php?ticket_id={$n->ticket_id}">{$n->ticket_id}: {$n->ticket_name}</a>
+                                            </td>
+                                            <td width="70%">
+                                                {$n->note}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <hr />
+                                            </td>
+                                        </tr>
+                                        {/foreach}
+                                    </table>
+                                </div>
+                                <br />
+                                <form method="post" action="releasecontainer.php?releasecontainer_id={$releasecontainer_id}&mode=edit_releasecontainer">
+                                    <input type="submit" name="delete_release_container" value="Delete Release" class="post" />
+                                </form>
+                                {/if}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

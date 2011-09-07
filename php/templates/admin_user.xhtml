@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>{$title}</title>
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link rel="SHORTCUT ICON" HREF="./images/favicon.ico" />
+    </head>
+    <body>
+        <h1>User Administration {if (!empty($warning))}- {$warning}{/if}</h1>
+        <hr />
+        <div id="admin">
+
+            <form action="admin_user.php" method="POST">
+                <table>
+                    <tr>
+                        <td colspan="2">
+                            <h3>Create User</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="15%">User: </td>
+                        <td width="85%"><input type="TEXT" size="15" name="username" /> </td>
+                    </tr>
+                    <tr>
+                        <td>Pass: </td>
+                        <td><input type="PASSWORD" size="15" name="password" /> </td>
+                    </tr>
+                    <tr>
+                        <td>Email: </td>
+                        <td><input type="TEXT" size="15" name="email" /> </td>
+                    </tr>
+                    <tr>
+                        <td>First Name: </td>
+                        <td><input type="TEXT" size="15" name="first_name" /> </td>
+                    </tr>
+                    <tr>
+                        <td>Last Name: </td>
+                        <td><input type="TEXT" size="15" name="last_name" /> </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="SUBMIT" value="Add" name="add_user" class="post" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <br />
+            <table>
+                <tr>
+                    <td>
+                        <h3>Edit Users</h3>
+                    </td>
+                </tr>
+            </table>
+            {foreach from=$user_list item=ul}
+            <form method="POST" action="admin_user.php">
+                <table>
+                    <tr>
+                        <td width="15%">
+                            User:
+                        </td>
+                        <td width="85%">
+                            <input type="text" size="15" name="username" value="{$ul->name}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Reset Pass:
+                        </td>
+                        <td>
+                            <input type="password" size="15" name="password" value="" /> (Leave blank to keep current password)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            First Name:
+                        </td>
+                        <td>
+                            <input type="test" size="15" name="first_name" value="{$ul->first_name}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Last Name:
+                        </td>
+                        <td>
+                            <input type="text" size="15" name="last_name" value="{$ul->last_name}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Email:
+                        </td>
+                        <td>
+                            <input type="text" size="15" name="email" value="{$ul->email}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Active:
+                        </td>
+                        <td>
+                            <input type="hidden" name="id" value="{$ul->id}" />
+                            <input type="checkbox" value="1" name="active" {if ($ul->active == 1)}checked{/if} />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" name="edit_user" value="Edit User" class="post" /></td>
+                    </tr>
+                </table>
+            </form>
+            {/foreach}
+        </div>
+    </body>
+</html>

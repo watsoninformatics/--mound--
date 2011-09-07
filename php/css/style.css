@@ -1,0 +1,568 @@
+
+
+/*
+Top level
+*/
+
+* {
+    margin:0px;
+    padding:0px;
+}
+p {
+    margin:0px;
+    padding:0px;
+}
+
+hr {
+    width: 100%;
+    color: #ccc;
+}
+
+a {
+    color:#0870A2;
+    text-decoration: none;
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+}
+
+h3 {
+    font-size: 1em;
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+}
+
+a:hover {
+    color: #0870A2;
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    text-decoration:underline;
+}
+body {
+    margin-left:0px;
+    margin-right: 0px;
+    margin-top:0px;
+    padding:0px;
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    font-size:12px;
+    color:#222222;
+    background-color: #f6f6f6;
+}
+hr {border: none 0;
+    border-top: 1px solid #cccccc;
+    width: 100%;
+    height: 2px;
+    margin: 10px auto 0 0;
+    text-align: left;
+}
+
+
+.post {
+    border: 1px solid #999999;
+    background: #efefff;
+    padding: 2px 4px;
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+
+.post:hover {
+    border: 1px solid #999999;
+    background: #f6f6f6;
+    padding: 2px 4px;
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+
+
+/*
+Top navigation
+*/
+
+
+table.topnav {
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    font-size: 12px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #f6f6f6;
+    color: #222222;
+}
+
+table.ticketnav {
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    font-size: 12px;
+    margin-left: 0px;
+    margin: 0px;
+    width: 100%;
+    background-color: #ffffff;
+    color: #3D5983;
+}
+
+a.ticketnav {
+    color: #0870A2;
+    text-decoration: none;
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+}
+
+a:hover.ticketnav {
+    color:#0870A2;
+    text-decoration: underline;
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+}
+
+
+ul#css3menu,ul#css3menu ul{
+    margin:0;list-style:none;background-color:#f6f6f6;background-repeat:repeat;border-width:0px;border-style:solid;border-color:#999999;}
+ul#css3menu ul{
+    display:none;position:absolute;left:0;top:100%;-moz-box-shadow:0.7px 0.7px 1px #222;-webkit-box-shadow:0.7px 0.7px 1px #222222;box-shadow:0.7px 0.7px 1px #222222;padding:0 9px 9px;background-color:#ffffff;background-image:none;border-width:1px;border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;border-style:solid;border-color:#d8d9da;}
+ul#css3menu li:hover>*{
+    display:block;background:#ffffff;}
+ul#css3menu li:hover{
+    position:relative;}
+ul#css3menu ul ul{
+    position:absolute;left:100%;top:0;}
+ul#css3menu{
+    padding:1px 1px 1px 0;display:block;font-size:0;float:left;}
+ul#css3menu li{
+    display:block;white-space:nowrap;font-size:0;float:left;}
+ul#css3menu>li,ul#css3menu li{
+    margin:0 0 0 1px;}
+ul#css3menu ul>li{
+    margin:1px 0 0;}
+ul#css3menu a:active, ul#css3menu a:focus{
+    outline-style:none;}
+ul#css3menu a{
+    display:block;vertical-align:middle;text-align:left;text-decoration:none;font:bold 12px Arial,sans-serif;color:#262626;cursor:default;padding:10px;background-color:#f6f6f6;background-repeat:repeat;background-position:0 200px;border-width:0px;border-style:none;}
+ul#css3menu ul li{
+    float:none;margin:9px 0 0;}
+ul#css3menu ul a{
+    text-align:left;padding:8px 0 0 0;background-color:#ffffff;background-image:none;border-width:1px 0 0 0;border-style:solid;border-color:#D9D9D9;border-radius:0px;-moz-border-radius:0px;-webkit-border-radius:0px;font:13px Arial,sans-serif;color:#222;text-decoration:none;}
+ul#css3menu li:hover>a{
+    background-color:#f6f6f6;border-style:none;font:bold 12px Arial,sans-serif;color:#222;text-decoration:none;background-position:0 100px;}
+ul#css3menu img{
+    border:none;vertical-align:middle;margin-right:10px;}
+ul#css3menu img.over{
+    display:none;}
+ul#css3menu li:hover > a img.def{
+    display:none;}
+ul#css3menu li:hover > a img.over{
+    display:inline;}
+ul#css3menu span{
+    display:block;overflow:visible;background-position:right center;background-repeat:no-repeat;padding-right:0px;}
+ul#css3menu ul li:hover>a{
+    background-color:#ffffff;background-image:none;border-style:solid;font:13px Arial,sans-serif;color:#0870A2;text-decoration:none;}
+ul#css3menu li.topfirst>a{
+    height:19px;line-height:19px;color:#0870A2;text-decoration: none}
+ul#css3menu li.topfirst:hover>a{
+    line-height:19px;color:#0870A2;text-decoration: underline;background-color:#f6f6f6}
+ul#css3menu li.topmenu>a{
+    height:19px;line-height:19px;color:#0870A2;text-decoration: none}
+ul#css3menu li.topmenu:hover>a{
+    line-height:19px;color:#0870A2;text-decoration: underline;background-color:#f6f6f6}
+ul#css3menu li.toplast>a{
+    height:19px;line-height:19px;color:#0870A2;text-decoration: none}
+ul#css3menu li.toplast:hover>a{
+    line-height:19px;color:#0870A2;text-decoration: underline;background-color:#f6f6f6}
+ul#css3menu ._>li>a{
+    padding:0;}
+ul#css3menu li.subfirst>a{
+    border-width:0;border-style:none;padding:0;}
+ul#css3menu li.subfirst:hover>a{
+    border-style:none;}
+
+
+/*
+Status feed
+*/
+
+.statusfeedtop {
+    padding: 1px;
+    background:#ffffff;
+    border:0px;
+    width: 100%;
+}
+
+#statusfeed table {
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    font-size: 12px;
+    width: 99%;
+    padding: 10px;
+    background:#ffffff;
+    border-bottom:1px solid #ccc;
+
+}
+
+#statusfeed h3 {
+    text-align: left;
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    line-height: 1.4em;
+    font-size: 1em;
+    overflow: hidden;
+    color: #222222;
+}
+
+#statusfeed p {
+    text-align: left;
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    line-height: 1.4em;
+    font-size: 12px;
+    overflow: hidden;
+}
+
+#statusfeed  a {
+    text-align: left;
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    line-height: 1.4em;
+    font-size: 12px;
+    overflow: hidden;
+    color: #0870A2;
+    text-decoration: none;
+}
+
+#statusfeed a:hover {
+    text-align: left;
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    line-height: 1.4em;
+    font-size: 12px;
+    overflow: hidden;
+    color:#0870A2;
+    text-decoration: underline;
+}
+
+/*
+User status
+*/
+
+
+.statustable {
+    padding: 10px;
+    background:#f3f3f3 url('../images/grad.png');
+    border:1px solid #ccc;
+    border-bottom:2px solid #bbb;
+    border-top:1px solid #ddd;
+    margin-top: 3px;
+}
+
+.statustop {
+    padding: 10px;
+    background:#ffffff;
+    border:0px;
+    width: 95%;
+}
+
+table.statuspost {
+    padding: 10px;
+    background:#FCFCFC;
+    border:0px;
+    margin-top: 3px;
+    width: 99%;
+    margin: 0px;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 3px solid #ddd;
+
+}
+
+td.statuspost {
+    padding: 5px;
+}
+
+#statusitem table {
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    font-size: 12px;
+    width: 99%;
+    border:0px;
+    margin: 0px;
+    padding: 5px;
+    background: #ffffff;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 3px solid #ddd;
+}
+
+#statusitem table:hover {
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    font-size: 12px;
+    width: 99%;
+    border:0px;
+    margin: 0px;
+    padding: 5px;
+    background: #efefff;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 3px solid #ddd;
+    color: #222222;
+    text-decoration: none;
+}
+
+textarea.statusbox {
+    border:1px solid #ccc;
+    border-bottom:2px solid #bbb;
+    border-top:1px solid #ddd;
+    margin-top: 3px;
+    background: #ffffff;
+    font: normal 10px/normal Arial, Helvetica, sans-serif;
+    color: #0870A2;
+    width: 99%;
+}
+
+#statusitem h3 {
+    font-size: 1em;
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+}
+
+/*
+Ticket style
+*/
+
+table.tickettable {
+    background-color: #ffffff;
+    padding: 10px;
+    padding-top: 0px;
+    font-size:12px;
+    width: 95%;
+    margin: 0px;
+}
+
+.tickettablebody {
+    background-color: #ffffff;
+    padding: 10px;
+    padding-top: 0px;
+    font-size:12px;
+    margin: 0px;
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-top: 0px;
+    border-right: 2px solid #ddd;
+}
+
+.tickettabletop {
+    background-color: #f6f6f6;
+    padding: 10px;
+    padding-top: 10px;
+    font-size:16px;
+    font-weight: bold;
+    margin: 0px;
+    border: 0px;
+    color: #000000;
+    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    border-bottom: 0px;
+    border-right: 2px solid #ddd;
+}
+
+.tickettable {
+    background-color: #ffffff;
+}
+
+td.ticketnotes {
+    padding: 10px;
+    background:#F3F3F3 url('../images/grad.png') no-repeat;
+    background-position: 100% 100%;
+    border:0px;
+    margin-top: 3px;
+    border-top: 1px solid #ccc;
+    border-right: 2px solid #ddd;
+    border-bottom: 1px solid #ccc;
+    border-left: 0px;
+}
+
+td.ticket_details {
+    padding: 5px;
+    background: #ffffff;
+    font-size:12px;
+    border: 1px solid #cccccc;
+    margin: 2px;
+}
+
+table.breakdown {
+    background-color: #f6f6f6;
+    padding: 10px;
+    padding-top: 10px;
+    font-size:12px;
+    margin: 0px;
+    border: 0px;
+    color: #000000;
+    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    border-bottom: 0px;
+    border-right: 2px solid #ddd;
+}
+
+table.breakdownnotes {
+    background-color: #ffffff;
+    padding: 10px;
+    padding-top: 0px;
+    font-size:12px;
+    margin: 0px;
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-top: 0px;
+    border-right: 2px solid #ddd;
+}
+
+
+table.rctable {
+    background-color: #ffffff;
+    padding: 10px;
+    padding-top: 0px;
+    font-size:12px;
+    width: 95%;
+    margin: 0px;
+}
+
+table.rcitemtable {
+    padding: 10px;
+    background:#ffffff;
+    border:1px solid #ccc;
+    border-bottom:2px solid #bbb;
+    border-top:1px solid #ddd;
+    margin-top: 3px;
+    background: #ffffff;
+}
+
+
+#ticketlist h3 {
+    font-size: 1em;
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+}
+
+#ticketlist table {
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    font-size: 12px;
+    width: 99%;
+    border:0px;
+    margin: 0px;
+    padding: 5px;
+    background: #ffffff;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 3px solid #ddd;
+
+}
+
+
+#ticketlist table:hover {
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    font-size: 12px;
+    width: 99%;
+    border:0px;
+    margin: 0px;
+    padding: 5px;
+    background: #efefff;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 3px solid #ddd;
+    color: #222222;
+}
+
+td.listliner {
+    border-right:1px solid #ddd;
+    padding-right: 1px;
+    margin-right: 1px;
+
+}
+
+table.capsule{
+    background-color: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    -moz-border-radius: 30px;
+    -webkit-border-radius: 30px;
+    border-radius: 30px;
+    border: 3px solid #ddd;
+
+}
+
+#ticketlisttop table {
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    font-size: 12px;
+    width: 99%;
+    background:#f6f6f6;
+    border:1px solid #ccc;
+    border-bottom:2px solid #bbb;
+    border-top:1px solid #ddd;
+    margin-top: 3px;
+}
+.login {
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    font-size: 12px;
+    border:1px solid #ccc;
+    border-bottom:3px solid #ddd;
+    border-top:1px solid #ccc;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    background: #ffffff;
+    text-align: center;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+
+}
+
+.shamelessplug {
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    font-size: 12px;
+    width: 100%;
+    text-align: center;
+
+}
+
+
+#stats table {
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    font-size: 12px;
+    width: 600px;
+    background:#FFFFFF;
+    border:0px;
+    margin-top: 3px;
+    margin-bottom: 10px;
+    padding: 3px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+td.activestats {
+    background:#efefff;
+    color:#0870A2;
+    text-align: center;
+}
+
+
+td.inactivestats {
+    background: #ffffff;
+    color: #0870A2;
+    text-align: center;
+}
+
+#admin table {
+    padding: 10px;
+    background:#f3f3f3 url('../images/grad.png') no-repeat;
+    background-position: 100% 100%;
+    border:1px solid #ccc;
+    border-bottom:2px solid #bbb;
+    border-top:1px solid #ddd;
+    margin-top: 3px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+
+#rcticketlist table {
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    font-size: 12px;
+    width: 90%;
+    border:1px solid #ccc;
+    border-bottom:3px solid #ddd;
+    border-top:1px solid #ccc;
+    margin-top: 3px;
+    padding: 10px;
+    background: #ffffff;
+
+}

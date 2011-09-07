@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>{$title}</title>
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link rel="SHORTCUT ICON" HREF="./images/favicon.ico" />
+    </head>
+    <body>
+
+        {include file="menu.xhtml" title="Menu header"}
+        <table class="capsule" width="90%" height="100%">
+            <tr>
+                <td>
+                    {foreach from=$breakdown item=bd}
+                    <table class="ticketnav">
+                        <tr>
+                            <td>
+                                <a href="ticket.php?ticket_id={$ticket_id}&tab=breakdown" class="ticketnav"><< Back to Ticket</a>{if (!empty($warning))} - {$warning}{/if}
+                            </td>
+                        </tr>
+                    </table>
+                    <br />
+                    <table class="tickettable">
+                        <tr>
+                            <td>
+                                <form action="breakdownitem.php?breakdown_id={$breakdown_id}&mode=edit_breakdown&ticket_id={$ticket_id}" method="post">
+                                    <table width="100%" class="breakdown">
+                                        <tr>
+                                            <td width="65%">{$bd->created_by} - {$bd->created_at} - {if $mode == "writable"}<input type="text" size="55" name="breakdown_description" value="{/if}{$bd->description|escape:'html'}{if $mode == "writable"}" /> - <input type="submit" value="Update" name="edit_breakdown_item" class="post" />{else} - <a href="breakdownitem.php?breakdown_id={$breakdown_id}&mode=writable&ticket_id={$ticket_id}">Edit</a>{/if}</td>
+                                            <td width="15%">{$bd->complete_text}</td>
+                                            <td width="20%">
+                                                {if ($bd->complete == 0)}<input type="submit" value="Done" title="Done" name="mark_complete" class="post" />{/if}
+                                                {if ($bd->complete == 1)}<input type="submit" value="Undo" title="Undo" name="mark_incomplete" class="post" />{/if}
+                                                <input type="submit" value="-" title="-" name="delete" class="post" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                                {/foreach}
+                                <table class="breakdownnotes" width="100%">
+                                    <tr>
+                                        <td>
+                                            <h3>Notes</h3>
+                                            <form method="POST" action="breakdownitem.php?breakdown_id={$breakdown_id}&mode=edit_breakdown&ticket_id={$ticket_id}">
+                                                <table>
+                                                    <tr>
+                                                        <td><textarea rows="5" cols="100" name="note"></textarea></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input type=CHECKBOX name="statusnote" /> Update My Status
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input type="submit" name="add_note" value="Add Note" class="post" /></td>
+                                                    </tr>
+                                                </table>
+                                            </form>
+                                            <br /><br />
+                                            {foreach from=$breakdown_notes item=notes}
+                                            <table width="100%">
+                                                <tr>
+                                                    <td><h3>{$notes->user_name} - {$notes->created_at}</h3></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{$notes->note}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="10">
+                                                        <hr />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            {/foreach}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+    </body>
+</html>
